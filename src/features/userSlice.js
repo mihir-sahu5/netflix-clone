@@ -1,7 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchCount } from './counterAPI';
+import { createSlice } from '@reduxjs/toolkit';
+//import { fetchCount } from './counter/counterAPI';
 
-const initialState = {
+/*const initialState = {
   value: 0,
   status: 'idle',
 };
@@ -20,8 +20,8 @@ export const incrementAsync = createAsyncThunk(
   }
 );
 
-export const counterSlice = createSlice({
-  name: 'counter',
+export const userSlice = createSlice({
+  name: 'user',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
@@ -70,4 +70,30 @@ export const incrementIfOdd = (amount) => (dispatch, getState) => {
   }
 };
 
-export default counterSlice.reducer;
+export default counterSlice.reducer;*/
+export const userSlice = createSlice({
+  name: "user",
+  initialState: {
+    user: null,
+  },
+  reducers: {
+    login: (state, action) => {
+      state.user = action.payload;
+    },
+    logout: (state) => {
+      state.user = null;
+    },
+    updateEmail: (state, action) => {
+      state.user.email = action.payload;
+    },
+    updatePlan: (state, action) => {
+      state.user["plan"] = action.payload;
+    },
+  },
+});
+
+export const { login, logout, updateEmail, updatePlan } = userSlice.actions;
+
+export const selectUser = (state) => state.user.user;
+
+export default userSlice.reducer;
